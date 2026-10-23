@@ -1,0 +1,27 @@
+Module 3 - Lesson 2: Reflection
+
+1. Why does the application use SQLite instead of relying only on a Dart list? 
+A Dart list is stored in memory, so it is erased when the app closes. 
+SQLite saves the tasks in a file on the device, so they are still there when the app is opened 
+again.
+
+2. What is the purpose of the primary key in the tasks table? 
+The primary key (id) gives every task its own unique number. Even if two tasks have the 
+same title, the app can still tell them apart. My code uses the id to update or 
+delete exactly one task.
+
+3. How does the repository simplify the UI's interaction with the database? 
+The UI only calls simple methods like create(), getAll(), markCompleted(), and delete(). 
+It does not need to know any SQL. All the database code is in one place (TaskRepository), 
+so the screen stays clean and easier to read.
+
+4. What would happen if a task were removed from the displayed list but not deleted from SQLite? 
+The task would look deleted, but its record would still be in the database. 
+When the app loads the tasks again, the task would come back.
+
+5. If the database schema later needed a new column for task priority, what parts of the application might need to change?
+
+The CREATE TABLE statement, to add the priority column.
+The database version, plus an onUpgrade migration so old users keep their data.
+The repository, so it can save and read the priority.
+The UI, so users can enter and see the priority.
